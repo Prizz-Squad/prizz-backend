@@ -11,7 +11,7 @@ import (
 )
 
 func (pg *Postgres) CreateUser(ctx context.Context, u *types.UserCreateRequest) (string, error) {
-	query := "INSERT INTO public.users (username, password, role, email) VALUES ($1, $2, $3) RETURNING id"
+	query := "INSERT INTO public.users (username, password, role, email) VALUES ($1, $2, $3, $4) RETURNING id"
 	var userID string
 	err := pg.db.QueryRow(ctx, query, u.Username, u.Password, u.Role, u.Email).Scan(&userID)
 	if err != nil {
