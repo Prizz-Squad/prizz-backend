@@ -11,9 +11,9 @@ import (
 )
 
 func (pg *Postgres) CreateUser(ctx context.Context, u *types.UserCreateRequest) (string, error) {
-	query := "INSERT INTO public.users (username, password, role, email) VALUES ($1, $2, $3, $4) RETURNING id"
+	query := "INSERT INTO public.users (username, password, department, role) VALUES ($1, $2, $3, $4) RETURNING id"
 	var userID string
-	err := pg.db.QueryRow(ctx, query, u.Username, u.Password, u.Role, u.Email).Scan(&userID)
+	err := pg.db.QueryRow(ctx, query, u.Username, u.Password, u.Role, u.Department).Scan(&userID)
 	if err != nil {
 		log.Printf("Unable to insert user: %v\n", err)
 		return "", err
@@ -26,7 +26,7 @@ func (pg *Postgres) GetUserByID(ctx context.Context, userID string) (*types.User
 	row := pg.db.QueryRow(ctx, query, userID)
 
 	var user types.User
-	err := row.Scan(&user.ID, &user.Username, &user.Password, &user.Role, &user.Email)
+	err := row.Scan(&user.ID, &user.Username, &user.Password, &user.Role, &user.Department)
 	if err != nil {
 		if errors.Is(err, sql.ErrNoRows) {
 			return nil, fmt.Errorf("user with ID %s not found", userID)
@@ -42,7 +42,7 @@ func (pg *Postgres) GetUserByName(ctx context.Context, username string) (*types.
 	row := pg.db.QueryRow(ctx, query, username)
 
 	var user types.User
-	err := row.Scan(&user.ID, &user.Username, &user.Password, &user.Role, &user.Email)
+	err := row.Scan(&user.ID, &user.Username, &user.Password, &user.Role, &user.Department)
 	if err != nil {
 		if errors.Is(err, sql.ErrNoRows) {
 			return nil, fmt.Errorf("user with ID %s not found", username)
@@ -66,7 +66,7 @@ func (pg *Postgres) GetUsers(ctx context.Context) ([]*types.User, error) {
 
 	for rows.Next() {
 		var user types.User
-		err := rows.Scan(&user.ID, &user.Username, &user.Password, &user.Role, &user.Email)
+		err := rows.Scan(&user.ID, &user.Username, &user.Password, &user.Role, &user.Department)
 		if err != nil {
 			log.Printf("Error scanning commit row: %v\n", err)
 			continue
@@ -108,7 +108,7 @@ func (pg *Postgres) Login(ctx context.Context, u *types.UserRequest) (string, er
 	query := "SELECT id, username, password, role, email FROM public.users WHERE username = $1"
 	row := pg.db.QueryRow(ctx, query, u.Username)
 	var user types.User
-	err := row.Scan(&user.ID, &user.Username, &user.Password, &user.Role, &user.Email)
+	err := row.Scan(&user.ID, &user.Username, &user.Password, &user.Role, &user.Department)
 	if err != nil {
 		if errors.Is(err, sql.ErrNoRows) {
 			return "", fmt.Errorf("user with username %s not found", u.Username)
