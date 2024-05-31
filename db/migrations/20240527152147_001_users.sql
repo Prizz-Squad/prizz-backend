@@ -1,11 +1,11 @@
 -- +goose Up
 -- +goose StatementBegin
 CREATE TABLE IF NOT EXISTS users (
-                                     id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
-                                     username VARCHAR UNIQUE,
-                                     email VARCHAR NOT NULL ,
-                                     password VARCHAR,
-                                     role INT
+    id UUID DEFAULT gen_random_uuid() PRIMARY key,
+    Username VARCHAR(255) NOT NULL Unique,
+    Password VARCHAR(255) NOT NULL,
+    Department int not NULL,
+    Role int not NULL
 );
 -- +goose StatementEnd
 

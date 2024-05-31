@@ -137,7 +137,14 @@ func (h *UserHandler) RoleBaseMiddleware() fiber.Handler {
 					return ctx.Next()
 				}
 			}
+		case types.ManagerRole:
+			for _, route := range util.ManagerRoutes {
+				if ctx.Path() == route || strings.Contains(ctx.Path(), route) {
+					return ctx.Next()
+				}
+			}
 		}
+
 		return nil
 	}
 }
