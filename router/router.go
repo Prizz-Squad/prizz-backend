@@ -41,10 +41,12 @@ func NewRouter() {
 
 	var (
 		userService    = services.NewUserService(database)
+		projectService = services.NewProjectService(database)
 		messageService = services.NewMessageService(database)
 	)
 	var (
 		userHandler    = handlers.NewUserHandler(userService)
+		projectHandler = handlers.NewProjectHandler(projectService)
 		messageHandler = handlers.NewMessageHandler(messageService)
 	)
 
@@ -52,6 +54,8 @@ func NewRouter() {
 	route.Use(middleware.AuthMiddleware(userHandler.RoleBaseMiddleware()))
 	routes.UserRoutes(userHandler, route)
 	routes.MessageRoutes(messageHandler, route)
+	routes.ProjectRoutes(projectHandler, route)
+
 }
 func Start(address string) error {
 	return api.Listen(address)
