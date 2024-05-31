@@ -7,10 +7,10 @@ const (
 	minPasswordLen = 7
 )
 const (
-	MemberRole = 0
-	ClientRole = 1
-	ManagerRole
-	AdminRole = 2
+	MemberRole  = 0
+	ClientRole  = 1
+	ManagerRole = 2
+	AdminRole   = 3
 )
 
 type User struct {
@@ -27,9 +27,8 @@ type UserCreateRequest struct {
 	Role       int    `json:"role"`
 }
 type UserRequest struct {
-	Username   string `json:"username"`
-	Password   string `json:"password"`
-	Department int    `json:"department"`
+	Username string `json:"username"`
+	Password string `json:"password"`
 }
 type UserResponse struct {
 	ID string `json:"id"`

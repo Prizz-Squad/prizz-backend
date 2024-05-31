@@ -9,6 +9,8 @@ var Routes = []string{
 // AdminRoutes MemberRoutes CustomerRoutes are the routes for each role that they aren't allowed to access
 var AdminRoutes = []string{}
 
+var ManagerRoutes = []string{}
+
 var MemberRoutes = []string{
 	"/prizz/api/v1/users",
 }
