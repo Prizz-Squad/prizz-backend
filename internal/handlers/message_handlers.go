@@ -22,7 +22,7 @@ func NewMessageHandler(messageService services.MessageService) *MessageHandler {
 func (h *MessageHandler) GetMessages(ctx *fiber.Ctx) error {
 	messages, err := h.messageService.GetAll(ctx.Context())
 	if err != nil {
-		return ctx.JSON(types.NewError(http.StatusInternalServerError, "Couldn't get the users"))
+		return ctx.JSON(types.NewError(http.StatusInternalServerError, "Couldn't get the messages"))
 	}
 	return ctx.JSON(messages)
 }

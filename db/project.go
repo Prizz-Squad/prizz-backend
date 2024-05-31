@@ -2,9 +2,8 @@ package db
 
 import (
 	"context"
-	"log"
-
 	"github.com/EraldCaka/prizz-backend/internal/types"
+	"log"
 )
 
 func (pg *Postgres) CreateProject(ctx context.Context, p *types.ProjectCreateRequest) (string, error) {
