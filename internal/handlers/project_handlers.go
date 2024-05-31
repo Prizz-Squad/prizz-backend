@@ -24,7 +24,6 @@ func NewProjectHandler(projectService services.ProjectService) *ProjectHandler {
 
 func (h *ProjectHandler) CreateProject(ctx *fiber.Ctx) error {
 	var project *types.ProjectCreateRequest
-	fmt.Println("inside")
 	if err := ctx.BodyParser(&project); err != nil {
 		return types.ErrBadRequest()
 	}
