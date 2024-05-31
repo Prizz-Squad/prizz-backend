@@ -40,15 +40,22 @@ func NewRouter() {
 	}))
 
 	var (
-		userService = services.NewUserService(database)
+		userService    = services.NewUserService(database)
+		projectService = services.NewProjectService(database)
+		messageService = services.NewMessageService(database)
 	)
 	var (
-		userHandler = handlers.NewUserHandler(userService)
+		userHandler    = handlers.NewUserHandler(userService)
+		projectHandler = handlers.NewProjectHandler(projectService)
+		messageHandler = handlers.NewMessageHandler(messageService)
 	)
 
 	var route = api.Group("/prizz/api/v1")
 	route.Use(middleware.AuthMiddleware(userHandler.RoleBaseMiddleware()))
 	routes.UserRoutes(userHandler, route)
+	routes.MessageRoutes(messageHandler, route)
+	routes.ProjectRoutes(projectHandler, route)
+
 }
 func Start(address string) error {
 	return api.Listen(address)
