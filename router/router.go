@@ -3,7 +3,6 @@ package router
 import (
 	"context"
 	"fmt"
-
 	"github.com/EraldCaka/prizz-backend/db"
 	"github.com/EraldCaka/prizz-backend/internal/handlers"
 	"github.com/EraldCaka/prizz-backend/internal/middleware"
@@ -43,15 +42,18 @@ func NewRouter() {
 	var (
 		userService    = services.NewUserService(database)
 		projectService = services.NewProjectService(database)
+		messageService = services.NewMessageService(database)
 	)
 	var (
 		userHandler    = handlers.NewUserHandler(userService)
 		projectHandler = handlers.NewProjectHandler(projectService)
+		messageHandler = handlers.NewMessageHandler(messageService)
 	)
 
 	var route = api.Group("/prizz/api/v1")
 	route.Use(middleware.AuthMiddleware(userHandler.RoleBaseMiddleware()))
 	routes.UserRoutes(userHandler, route)
+	routes.MessageRoutes(messageHandler, route)
 	routes.ProjectRoutes(projectHandler, route)
 
 }

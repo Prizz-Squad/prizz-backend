@@ -7,9 +7,6 @@ build:
 run:
 	@./bin/api
 
-test:
-	@go test ./..
-
 tidy:
 	@go mod tidy
 
