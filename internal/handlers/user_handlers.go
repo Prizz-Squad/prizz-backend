@@ -1,14 +1,15 @@
 package handlers
 
 import (
-	"github.com/EraldCaka/prizz-backend/internal/services"
-	"github.com/EraldCaka/prizz-backend/internal/types"
-	"github.com/EraldCaka/prizz-backend/util"
-	"github.com/gofiber/fiber/v2"
 	"log"
 	"net/http"
 	"strings"
 	"time"
+
+	"github.com/EraldCaka/prizz-backend/internal/services"
+	"github.com/EraldCaka/prizz-backend/internal/types"
+	"github.com/EraldCaka/prizz-backend/util"
+	"github.com/gofiber/fiber/v2"
 )
 
 type UserHandler struct {
