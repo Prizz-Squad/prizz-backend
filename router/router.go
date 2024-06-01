@@ -3,7 +3,6 @@ package router
 import (
 	"context"
 	"fmt"
-
 	"github.com/EraldCaka/prizz-backend/db"
 	"github.com/EraldCaka/prizz-backend/internal/handlers"
 	"github.com/EraldCaka/prizz-backend/internal/middleware"
@@ -45,12 +44,14 @@ func NewRouter() {
 		projectService = services.NewProjectService(database)
 		messageService = services.NewMessageService(database)
 		fileService    = services.NewFileService(database)
+		ticketService  = services.NewTicketService(database)
 	)
 	var (
 		userHandler    = handlers.NewUserHandler(userService)
 		projectHandler = handlers.NewProjectHandler(projectService)
 		messageHandler = handlers.NewMessageHandler(messageService)
 		fileHandler    = handlers.NewFileHandler(fileService)
+		ticketHandler  = handlers.NewTicketHandler(ticketService)
 	)
 
 	var route = api.Group("/prizz/api/v1")
@@ -58,6 +59,7 @@ func NewRouter() {
 	routes.UserRoutes(userHandler, route)
 	routes.MessageRoutes(messageHandler, route)
 	routes.ProjectRoutes(projectHandler, route)
+	routes.TicketRoutes(ticketHandler, route)
 	routes.FileRoutes(fileHandler, route)
 
 }
