@@ -29,6 +29,10 @@ var MemberRoutes = []string{
 	"/prizz/api/v1/users",
 	"/prizz/api/v1/project",
 	"/prizz/api/v1/newTicket",
+	"/prizz/api/v1/taskHistory",
+	"/prizz/api/v1/taskHistory/create",
+	"/prizz/api/v1/taskHistoryByDateAndUser",
+	"/prizz/api/v1/totalHours",
 }
 
 var CustomerRoutes = []string{
@@ -40,4 +44,5 @@ var CustomerRoutes = []string{
 	"/prizz/api/v1/ticketDescription",
 	"/prizz/api/v1/ticketPostDate",
 	"/prizz/api/v1/newTicket",
+	"/prizz/api/v1/taskHistory/create",
 }

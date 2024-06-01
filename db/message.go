@@ -36,7 +36,7 @@ func (pg *Postgres) GetMessages(ctx context.Context) ([]*types.Message, error) {
 		messages = append(messages, &mess)
 	}
 	if err := rows.Err(); err != nil {
-		log.Printf("Error iterating over user rows: %v\n", err)
+		log.Printf("Error iterating over messages rows: %v\n", err)
 		return nil, err
 	}
 	return messages, nil
