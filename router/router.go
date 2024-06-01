@@ -40,14 +40,16 @@ func NewRouter() {
 	}))
 
 	var (
-		userService    = services.NewUserService(database)
-		projectService = services.NewProjectService(database)
-		messageService = services.NewMessageService(database)
+		userService        = services.NewUserService(database)
+		projectService     = services.NewProjectService(database)
+		messageService     = services.NewMessageService(database)
+		taskHistoryService = services.NewTaskService(database)
 	)
 	var (
-		userHandler    = handlers.NewUserHandler(userService)
-		projectHandler = handlers.NewProjectHandler(projectService)
-		messageHandler = handlers.NewMessageHandler(messageService)
+		userHandler        = handlers.NewUserHandler(userService)
+		projectHandler     = handlers.NewProjectHandler(projectService)
+		messageHandler     = handlers.NewMessageHandler(messageService)
+		taskHistoryHandler = handlers.NewTaskHistoryHandler(taskHistoryService)
 	)
 
 	var route = api.Group("/prizz/api/v1")
@@ -55,6 +57,7 @@ func NewRouter() {
 	routes.UserRoutes(userHandler, route)
 	routes.MessageRoutes(messageHandler, route)
 	routes.ProjectRoutes(projectHandler, route)
+	routes.TaskHistoryRoutes(taskHistoryHandler, route)
 
 }
 func Start(address string) error {
