@@ -13,14 +13,14 @@ import (
 	"github.com/gofiber/fiber/v2/middleware/cors"
 )
 
-var config = fiber.Config{
+var Config = fiber.Config{
 	ErrorHandler: types.ErrorHandler,
 }
 
 var api *fiber.App
 
 func NewRouter() {
-	api = fiber.New(config)
+	api = fiber.New(Config)
 	database, err := db.NewPGInstance(context.Background())
 	if err != nil {
 		fmt.Println(types.NewError(500, fmt.Sprintf("Could not initialize database connection: %s", err)))
@@ -64,7 +64,6 @@ func NewRouter() {
 	routes.TicketRoutes(ticketHandler, route)
 	routes.FileRoutes(fileHandler, route)
 	routes.TaskHistoryRoutes(taskHistoryHandler, route)
-
 }
 func Start(address string) error {
 	return api.Listen(address)

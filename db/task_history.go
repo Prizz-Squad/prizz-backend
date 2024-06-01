@@ -79,7 +79,6 @@ func (pg *Postgres) GetTaskHistory(ctx context.Context, startTime, endTime strin
 
 func (pg *Postgres) GetAllHoursByUserId(ctx context.Context, userId string) (*types.TotalCountResponse, error) {
 	var totalCountResponse types.TotalCountResponse
-	fmt.Println(userId)
 	query := `
     SELECT user_id, SUM(hours) AS total_hours,
     COUNT(task_id) AS count_task

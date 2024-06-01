@@ -7,6 +7,12 @@ build:
 run:
 	@./bin/api
 
+compile:
+	@go build -o bin/report cmd/report_server.go
+
+start:
+	@./bin/report
+
 tidy:
 	@go mod tidy
 

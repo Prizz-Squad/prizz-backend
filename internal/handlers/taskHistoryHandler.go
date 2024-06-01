@@ -26,8 +26,6 @@ func NewTaskHistoryHandler(taskHistoryService services.TaskHistoryService) *Task
 func (th *TaskHistoryHandler) Create(ctx *fiber.Ctx) error {
 	var testHistory *types.TaskRequest
 	if err := ctx.BodyParser(&testHistory); err != nil {
-		fmt.Println(err)
-		fmt.Println(ctx.Body())
 		return types.ErrBadRequest()
 	}
 	testHistoryId, err := th.taskHistoryService.Create(ctx.Context(), testHistory)
