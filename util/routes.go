@@ -16,9 +16,14 @@ var ManagerRoutes = []string{
 var MemberRoutes = []string{
 	"/prizz/api/v1/users",
 	"/prizz/api/v1/project",
+	"/prizz/api/v1/taskHistory",
+	"/prizz/api/v1/taskHistory/create",
+	"/prizz/api/v1/taskHistoryByDateAndUser",
+	"/prizz/api/v1/totalHours",
 }
 
 var CustomerRoutes = []string{
 	"/prizz/api/v1/users",
 	"/prizz/api/v1/project",
+	"/prizz/api/v1/taskHistory/create",
 }
