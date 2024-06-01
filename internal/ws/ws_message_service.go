@@ -83,18 +83,20 @@ func (h *Handler) ConnectAndComment(c *websocket.Conn) {
 
 }
 
-func (h *Handler) CloseWSConnection(c *fiber.Ctx) {
+func (h *Handler) CloseWSConnection(c *fiber.Ctx) error {
 
 	if task := h.hub.Rooms[c.Params("taskID")]; task == nil || task.ID == "" {
-		c.JSON(http.StatusBadRequest, "bad request(roomID)")
-		return
+		return c.JSON(http.StatusBadRequest, "bad request(roomID)")
+
 	}
 	client := h.hub.Rooms[c.Params("taskID")].Clients[c.Params("userID")]
 	if cl := client; cl == nil || cl.ID == "" {
-		c.JSON(http.StatusBadRequest, "bad request")
-		return
+		return c.JSON(http.StatusBadRequest, "bad request")
 	}
 
-	client.Conn.Close()
-	c.JSON(http.StatusOK, "User disconnected successfully")
+	if err := client.Conn.Close(); err != nil {
+		return err
+	}
+
+	return c.JSON(http.StatusOK, "User disconnected successfully")
 }
