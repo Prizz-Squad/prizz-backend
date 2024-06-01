@@ -43,11 +43,13 @@ func NewRouter() {
 		userService    = services.NewUserService(database)
 		projectService = services.NewProjectService(database)
 		messageService = services.NewMessageService(database)
+		ticketService  = services.NewTicketService(database)
 	)
 	var (
 		userHandler    = handlers.NewUserHandler(userService)
 		projectHandler = handlers.NewProjectHandler(projectService)
 		messageHandler = handlers.NewMessageHandler(messageService)
+		ticketHandler  = handlers.NewTicketHandler(ticketService)
 	)
 
 	var route = api.Group("/prizz/api/v1")
@@ -55,6 +57,7 @@ func NewRouter() {
 	routes.UserRoutes(userHandler, route)
 	routes.MessageRoutes(messageHandler, route)
 	routes.ProjectRoutes(projectHandler, route)
+	routes.TicketRoutes(ticketHandler, route)
 
 }
 func Start(address string) error {

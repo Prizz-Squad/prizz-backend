@@ -7,18 +7,33 @@ var Routes = []string{
 }
 
 // AdminRoutes MemberRoutes CustomerRoutes are the routes for each role that they aren't allowed to access
-var AdminRoutes = []string{}
+var AdminRoutes = []string{
+	"/prizz/api/v1/ticketPostDate",
+	"/prizz/api/v1/ticketStatus",
+	"/prizz/api/v1/ticketDescription",
+	"/prizz/api/v1/ticketPostDate",
+}
 
 var ManagerRoutes = []string{
 	"/prizz/api/v1/project",
+	"/prizz/api/v1/ticketPostDate",
+	"/prizz/api/v1/ticketStatus",
+	"/prizz/api/v1/ticketDescription",
+	"/prizz/api/v1/ticketPostDate",
 }
 
 var MemberRoutes = []string{
 	"/prizz/api/v1/users",
 	"/prizz/api/v1/project",
+	"/prizz/api/v1/newTicket",
 }
 
 var CustomerRoutes = []string{
 	"/prizz/api/v1/users",
 	"/prizz/api/v1/project",
+	"/prizz/api/v1/ticketPostDate",
+	"/prizz/api/v1/ticketStatus",
+	"/prizz/api/v1/ticketDescription",
+	"/prizz/api/v1/ticketPostDate",
+	"/prizz/api/v1/newTicket",
 }
