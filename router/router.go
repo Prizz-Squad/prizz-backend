@@ -43,12 +43,14 @@ func NewRouter() {
 		userService    = services.NewUserService(database)
 		projectService = services.NewProjectService(database)
 		messageService = services.NewMessageService(database)
+		fileService    = services.NewFileService(database)
 		ticketService  = services.NewTicketService(database)
 	)
 	var (
 		userHandler    = handlers.NewUserHandler(userService)
 		projectHandler = handlers.NewProjectHandler(projectService)
 		messageHandler = handlers.NewMessageHandler(messageService)
+		fileHandler    = handlers.NewFileHandler(fileService)
 		ticketHandler  = handlers.NewTicketHandler(ticketService)
 	)
 
@@ -58,6 +60,7 @@ func NewRouter() {
 	routes.MessageRoutes(messageHandler, route)
 	routes.ProjectRoutes(projectHandler, route)
 	routes.TicketRoutes(ticketHandler, route)
+	routes.FileRoutes(fileHandler, route)
 
 }
 func Start(address string) error {
