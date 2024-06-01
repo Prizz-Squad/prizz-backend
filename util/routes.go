@@ -4,6 +4,7 @@ package util
 var Routes = []string{
 	"/prizz/api/v1/login",
 	"/prizz/api/v1/register",
+	"/prizz/api/v1/ws/comment",
 }
 
 // AdminRoutes MemberRoutes CustomerRoutes are the routes for each role that they aren't allowed to access

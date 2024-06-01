@@ -5,12 +5,13 @@ import (
 	"github.com/EraldCaka/prizz-backend/util"
 	"github.com/gofiber/fiber/v2"
 	"github.com/golang-jwt/jwt/v5"
+	"strings"
 )
 
 func AuthMiddleware(roleBase fiber.Handler) fiber.Handler {
 	return func(c *fiber.Ctx) error {
 		for _, route := range util.Routes {
-			if c.Path() == route {
+			if strings.Contains(c.Path(), route) {
 				return c.Next()
 			}
 		}

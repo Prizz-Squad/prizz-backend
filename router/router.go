@@ -9,6 +9,7 @@ import (
 	"github.com/EraldCaka/prizz-backend/internal/routes"
 	"github.com/EraldCaka/prizz-backend/internal/services"
 	"github.com/EraldCaka/prizz-backend/internal/types"
+	"github.com/EraldCaka/prizz-backend/internal/ws"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
 )
@@ -54,6 +55,9 @@ func NewRouter() {
 		ticketHandler  = handlers.NewTicketHandler(ticketService)
 	)
 
+	var websocketConnection = ws.NewHub()
+	var websocketHandler = ws.NewHandler(websocketConnection)
+
 	var route = api.Group("/prizz/api/v1")
 	route.Use(middleware.AuthMiddleware(userHandler.RoleBaseMiddleware()))
 	routes.UserRoutes(userHandler, route)
@@ -61,6 +65,8 @@ func NewRouter() {
 	routes.ProjectRoutes(projectHandler, route)
 	routes.TicketRoutes(ticketHandler, route)
 	routes.FileRoutes(fileHandler, route)
+	routes.WsMessageRoute(websocketHandler, route)
+	//api.Get("/ws/disconnect", websocketHandler.CloseWSConnection())
 
 }
 func Start(address string) error {
